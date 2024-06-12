@@ -1,10 +1,14 @@
 package com.saikumar.customer;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
-public record CustomerService(CustomerRepository customerRepository) {
-
+@AllArgsConstructor
+public class CustomerService {
+    private CustomerRepository customerRepository;
+    private RestTemplate restTemplate;
     public void register(CustomerRegistrationRequest request){
         Customer customer= Customer.builder()
                 .firstName(request.firstName())
@@ -14,7 +18,12 @@ public record CustomerService(CustomerRepository customerRepository) {
 
         //TODO: check if email is valid
         //TODO: check if email is not taken
-        //TODO: store customer in db
-        customerRepository.save(customer);
+        customerRepository.saveAndFlush(customer); //save doesnot save data immediately, saveAndFlush saves data instantly
+        //TODO: check if fraudster
+        FraudCheckResponse fraudCheckResponse=restTemplate.getForObject("http://localhost:8081/api/v1/fraud-controller/{customerid}", FraudCheckResponse.class,customer.getId());
+        if(fraudCheckResponse.isFraudster()){
+            throw new IllegalStateException("fraudster");
+        }
+        //TODO: send notification
     }
 }
