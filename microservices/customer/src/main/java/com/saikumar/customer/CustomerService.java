@@ -20,7 +20,8 @@ public class CustomerService {
         //TODO: check if email is not taken
         customerRepository.saveAndFlush(customer); //save doesnot save data immediately, saveAndFlush saves data instantly
         //TODO: check if fraudster
-        FraudCheckResponse fraudCheckResponse=restTemplate.getForObject("http://localhost:8081/api/v1/fraud-controller/{customerid}", FraudCheckResponse.class,customer.getId());
+        FraudCheckResponse fraudCheckResponse=restTemplate.getForObject(
+                "http://FRAUD/api/v1/fraud-controller/{customerid}", FraudCheckResponse.class,customer.getId());//replce localhost:8081 with FRAUD
         if(fraudCheckResponse.isFraudster()){
             throw new IllegalStateException("fraudster");
         }
