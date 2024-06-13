@@ -2,10 +2,11 @@ package com.saikumar.fraud;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import com.saikumar.clients.fraud.FraudCheckResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/fraud-controller")
+@RequestMapping("/api/v1/fraud-check")
 @AllArgsConstructor
 @Slf4j
 public class FraudController {
