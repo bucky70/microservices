@@ -1,9 +1,0 @@
-com/saikumar/CustomerApplication.class
-com/saikumar/customer/CustomerRegistrationRequest.class
-com/saikumar/customer/FraudCheckResponse.class
-com/saikumar/customer/Customer$CustomerBuilder.class
-com/saikumar/customer/Customer.class
-com/saikumar/customer/CustomerController.class
-com/saikumar/customer/CustomerService.class
-com/saikumar/customer/CustomerConfig.class
-com/saikumar/customer/CustomerRepository.class
